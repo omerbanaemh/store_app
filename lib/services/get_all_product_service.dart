@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:store_app/helper/api.dart';
-import 'package:store_app/helper/show_snack_bar.dart';
 import 'package:store_app/models/product_model.dart';
 
 class AllProductsService {
