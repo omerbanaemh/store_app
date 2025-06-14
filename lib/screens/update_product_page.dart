@@ -16,7 +16,7 @@ class UpdateProductPage extends StatefulWidget {
 }
 
 class _UpdateProductPageState extends State<UpdateProductPage> {
-  String? productName, desc, image,price;
+  String? productName, desc, image,price,category;
 
   bool isLoading = false;
   @override
@@ -80,6 +80,12 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   },
                   hintText: 'image',
                 ),
+                CustomTextField(
+                  onChanged: (data) {
+                    category = data;
+                  },
+                  hintText: 'image',
+                ),
                 const SizedBox(
                   height: 70,
                 ),
@@ -115,6 +121,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
         price: price == null ? product.price.toString() : price!,
         desc: desc == null ? product.description : desc!,
         image: image == null ? product.image : image!,
-        category: product.category);
+        category: category == null ? product.category : category!);
   }
 }

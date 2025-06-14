@@ -4,10 +4,10 @@ class ProductModel {
   final dynamic id;
   final String title;
   final dynamic price;
-  final String description;
+  final String? description;
   final String image;
   final RatingModel? rating;
-  final String category;
+  final String? category;
   ProductModel(
       {required this.id,
       required this.title,
@@ -15,7 +15,7 @@ class ProductModel {
       required this.price,
       required this.description,
       required this.image,
-      required this.rating});
+        this.rating});
 
   factory ProductModel.fromJson(jsonData) {
     return ProductModel(
