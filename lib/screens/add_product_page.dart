@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:store_app/helper/show_snack_bar.dart';
 import 'package:store_app/services/add_product.dart';
 import 'package:store_app/widgets/custom_button.dart';
 import 'package:store_app/widgets/custom_text_field.dart';
@@ -19,14 +20,12 @@ class _AddProductPageState extends State<AddProductPage> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    // ProductModel product =
-    //     ModalRoute.of(context)!.settings.arguments as ProductModel;
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Update Product',
+          title: const Text(
+            'Add Product',
             style: TextStyle(
               color: Colors.black,
             ),
@@ -41,7 +40,7 @@ class _AddProductPageState extends State<AddProductPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 CustomTextField(
@@ -50,7 +49,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   },
                   hintText: 'Product Name',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -59,7 +58,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   },
                   hintText: 'description',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -69,7 +68,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   hintText: 'price',
                   inputType: TextInputType.number,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -78,7 +77,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   },
                   hintText: 'image',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
                 CustomButon(
@@ -88,9 +87,10 @@ class _AddProductPageState extends State<AddProductPage> {
                     setState(() {});
                     try {
                       await addProduct();
-
+                      successSnackBar(context, 'product added');
                       print('success');
                     } catch (e) {
+                      errorSnackBar(context, 'error');
                       print(e.toString());
                     }
                     isLoading = false;

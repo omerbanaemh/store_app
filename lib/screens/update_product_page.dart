@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:store_app/helper/show_snack_bar.dart';
 import 'package:store_app/models/product_model.dart';
 import 'package:store_app/services/update_product.dart';
 import 'package:store_app/widgets/custom_button.dart';
@@ -8,14 +9,15 @@ import 'package:store_app/widgets/custom_text_field.dart';
 class UpdateProductPage extends StatefulWidget {
   static String id = 'update product';
 
+  const UpdateProductPage({super.key});
+
   @override
   State<UpdateProductPage> createState() => _UpdateProductPageState();
 }
 
 class _UpdateProductPageState extends State<UpdateProductPage> {
-  String? productName, desc, image;
+  String? productName, desc, image,price;
 
-  String? price;
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       inAsyncCall: isLoading,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Update Product',
             style: TextStyle(
               color: Colors.black,
@@ -41,7 +43,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 CustomTextField(
@@ -50,7 +52,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   },
                   hintText: 'Product Name',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -59,7 +61,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   },
                   hintText: 'description',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -69,7 +71,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   hintText: 'price',
                   inputType: TextInputType.number,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CustomTextField(
@@ -78,7 +80,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   },
                   hintText: 'image',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 70,
                 ),
                 CustomButon(
@@ -88,9 +90,10 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                     setState(() {});
                     try {
                       await updateProduct(product);
-
+                      successSnackBar(context, 'product updated');
                       print('success');
                     } catch (e) {
+                      errorSnackBar(context, 'error');
                       print(e.toString());
                     }
                     isLoading = false;

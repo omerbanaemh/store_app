@@ -1,3 +1,5 @@
+import 'package:store_app/models/rating_model.dart';
+
 class ProductModel {
   final dynamic id;
   final String title;
@@ -26,16 +28,5 @@ class ProductModel {
         rating: jsonData['rating'] == null
             ? null
             : RatingModel.fromJson(jsonData['rating']));
-  }
-}
-
-class RatingModel {
-  final dynamic rate;
-  final int count;
-
-  RatingModel({required this.rate, required this.count});
-
-  factory RatingModel.fromJson(jsonData) {
-    return RatingModel(rate: jsonData['rate'], count: jsonData['count']);
   }
 }
